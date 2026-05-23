@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Todos And Notes{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="{{ url_for('index') }}">Todos And Notes</a>
+      <nav class="nav">
+        <a class="{{ 'active' if request.endpoint == 'todos' else '' }}" href="{{ url_for('todos') }}">Todo</a>
+        <a class="{{ 'active' if request.endpoint == 'notes' else '' }}" href="{{ url_for('notes') }}">Notes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

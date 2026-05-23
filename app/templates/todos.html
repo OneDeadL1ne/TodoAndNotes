@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Todo | Todos And Notes{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div>
+    <h1>Todo</h1>
+    <p>Организованная структура списка дел.</p>
+  </div>
+</header>
+
+<div class="grid">
+  <section class="panel">
+    <h2>Новая задача</h2>
+    <form method="post">
+      <label for="title">Текст задачи</label>
+      <input id="title" name="title" required maxlength="120">
+
+      <button type="submit">Добавить</button>
+    </form>
+  </section>
+
+  <section class="list">
+    {% for todo in todos %}
+      <article class="card {{ 'done' if todo.status == 'done' else '' }}">
+        <div>
+          <h3>{{ todo.title }}</h3>
+          <span>{{ 'Выполнено' if todo.status == 'done' else 'Активно' }} · {{ todo.created_at }}</span>
+        </div>
+        <div class="row-actions">
+          <form method="post" action="{{ url_for('toggle_todo', todo_id=todo.id) }}">
+            <button class="secondary" type="submit">
+              {{ 'Вернуть' if todo.status == 'done' else 'Выполнено' }}
+            </button>
+          </form>
+          <form method="post" action="{{ url_for('delete_todo', todo_id=todo.id) }}">
+            <button class="danger" type="submit">Удалить</button>
+          </form>
+        </div>
+      </article>
+    {% else %}
+      <div class="empty">Задач пока нет.</div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

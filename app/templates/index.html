@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Главная | Todos And Notes{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div>
+    <h1>Todos And Notes</h1>
+    <p>Веб-приложение для списка дел и бессистемных идей.</p>
+  </div>
+</header>
+
+<section class="stats">
+  <article>
+    <span>Заметки и идеи</span>
+    <strong>{{ stats.notes }}</strong>
+  </article>
+  <article>
+    <span>Все задачи</span>
+    <strong>{{ stats.todos }}</strong>
+  </article>
+  <article>
+    <span>Активные задачи</span>
+    <strong>{{ stats.active }}</strong>
+  </article>
+  <article>
+    <span>Выполненные задачи</span>
+    <strong>{{ stats.done }}</strong>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Notes | Todos And Notes{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div>
+    <h1>Notes</h1>
+    <p>Бессистемные идеи, заметки и мысли в свободной форме.</p>
+  </div>
+</header>
+
+<div class="grid">
+  <section class="panel">
+    <h2>Новая идея</h2>
+    <form method="post">
+      <label for="title">Заголовок</label>
+      <input id="title" name="title" required maxlength="120">
+
+      <label for="body">Текст</label>
+      <textarea id="body" name="body" required></textarea>
+
+      <button type="submit">Добавить</button>
+    </form>
+  </section>
+
+  <section class="list">
+    {% for note in notes %}
+      <article class="card">
+        <div>
+          <h3>{{ note.title }}</h3>
+          <p>{{ note.body }}</p>
+          <span>{{ note.created_at }}</span>
+        </div>
+        <form method="post" action="{{ url_for('delete_note', note_id=note.id) }}">
+          <button class="danger" type="submit">Удалить</button>
+        </form>
+      </article>
+    {% else %}
+      <div class="empty">Идей пока нет.</div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
