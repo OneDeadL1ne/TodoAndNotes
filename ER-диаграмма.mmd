@@ -1,0 +1,22 @@
+erDiagram
+    USERS {
+        INTEGER id PK "Первичный ключ"
+        TEXT username "Имя пользователя"
+    }
+    NOTES {
+        INTEGER id PK "Первичный ключ"
+        INTEGER user_id FK "Внешний ключ пользователя"
+        TEXT title "Заголовок заметки"
+        TEXT body "Текст заметки"
+        TEXT created_at "Дата создания"
+    }
+    TODOS {
+        INTEGER id PK "Первичный ключ"
+        INTEGER user_id FK "Внешний ключ пользователя"
+        TEXT title "Текст задачи"
+        TEXT status "Статус задачи (active/done)"
+        TEXT created_at "Дата создания"
+    }
+
+    USERS ||--o{ NOTES : "создает"
+    USERS ||--o{ TODOS : "владеет"

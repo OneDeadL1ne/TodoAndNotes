@@ -1,0 +1,22 @@
+erDiagram
+    USERS {
+        INTEGER id PK
+        TEXT username
+    }
+    NOTES {
+        INTEGER id PK
+        INTEGER user_id FK
+        TEXT title
+        TEXT body
+        TEXT created_at
+    }
+    TODOS {
+        INTEGER id PK
+        INTEGER user_id FK
+        TEXT title
+        TEXT status
+        TEXT created_at
+    }
+
+    USERS ||--o{ NOTES : "1 ко многим"
+    USERS ||--o{ TODOS : "1 ко многим"
